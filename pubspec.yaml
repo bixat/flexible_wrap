@@ -1,7 +1,7 @@
 name: flexible_wrap
-description: "A new Flutter package project."
+description: "FlexibleWrap is a Flutter widget designed to provide a flexible and customizable way to arrange widgets in a wrap layout"
 version: 0.0.1
-homepage:
+homepage: https://github.com/bixat/flexible_wrap
 
 environment:
   sdk: '>=3.3.4 <4.0.0'
