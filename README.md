@@ -2,6 +2,10 @@
 
 FlexibleWrap is a Flutter package designed to provide a flexible and customizable way to arrange widgets in a wrap layout. It allows developers to create dynamic layouts where widgets can wrap onto the next line based on available space, similar to how items behave in a shopping cart or a list of cards.
 
+## Showcase
+
+![showcase](showcase.gif)
+
 ## Features
 
 - **Customizable Layout**: Easily customize the layout of your widgets with various parameters such as direction, alignment, spacing, and more.

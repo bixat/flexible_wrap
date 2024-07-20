@@ -41,9 +41,9 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: FlexibleWrap(
-        length: 80, // Number of children to display
+        length: 35, // Number of children to display
         runAlignment: WrapAlignment.start,
-        crossAxisAlignment: WrapCrossAlignment.start,
+        crossAxisAlignment: WrapCrossAlignment.end,
         builder: (int index, double itemExtraWidth) {
           return Padding(
             padding: EdgeInsets.all(padding),
@@ -55,7 +55,9 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           );
         },
-        itemWidth: 380.0 + (padding * 2), // Width of each item + padding value, 2 => horizontal and vertical
+        itemWidth: 380.0 +
+            (padding *
+                2), // Width of each item + padding value, 2 => horizontal and vertical
         direction: Axis.horizontal, // Direction to arrange the children
         alignment: WrapAlignment.start, // Alignment of children within a run
       ),
