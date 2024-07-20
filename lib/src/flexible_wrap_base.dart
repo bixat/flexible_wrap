@@ -68,8 +68,8 @@ class FlexibleWrap extends StatelessWidget {
       double extraWidth = 0.0;
       if (constraint.maxWidth.isFinite) {
         int items = (constraint.maxWidth / itemWidth).floor();
-        double reminder = constraint.maxWidth.remainder(itemWidth);
-        extraWidth = reminder / items;
+        double remainder = constraint.maxWidth.remainder(itemWidth);
+        extraWidth = remainder / items;
       }
       return Wrap(
         direction: direction,
