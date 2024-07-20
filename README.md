@@ -4,7 +4,7 @@ FlexibleWrap is a Flutter package designed to provide a flexible and customizabl
 
 ## Showcase
 
-![showcase](showcase.gif)
+![showcase](https://github.com/bixat/flexible_wrap/blob/main/showcase.gif?raw=true)
 
 ## Features
 
