@@ -45,7 +45,6 @@ class _MyHomePageState extends State<MyHomePage> {
         runAlignment: WrapAlignment.start,
         crossAxisAlignment: WrapCrossAlignment.start,
         builder: (int index, double itemExtraWidth) {
-          print(itemExtraWidth);
           return Padding(
             padding: EdgeInsets.all(padding),
             child: Container(
