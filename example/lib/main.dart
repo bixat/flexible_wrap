@@ -60,9 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             );
           },
-          itemWidth: itemWidth +
-              (padding *
-                  2), // Width of each item + padding value, 2 => horizontal and vertical
+          itemWidth: itemWidth, // Width of each item
           direction: Axis.horizontal, // Direction to arrange the children
           alignment: WrapAlignment.start, // Alignment of children within a run
         ),
