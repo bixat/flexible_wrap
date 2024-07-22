@@ -33,6 +33,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final padding = 8.0;
+  final spacing = 10.0;
+  final itemWidth = 380.0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,18 +46,19 @@ class _MyHomePageState extends State<MyHomePage> {
         length: 35, // Number of children to display
         runAlignment: WrapAlignment.start,
         crossAxisAlignment: WrapCrossAlignment.end,
+        spacing: spacing,
         builder: (int index, double itemExtraWidth) {
           return Padding(
             padding: EdgeInsets.all(padding),
             child: Container(
               height: 60,
               color: Colors.blue,
-              width: 380.0 + itemExtraWidth,
+              width: itemWidth + itemExtraWidth,
               child: Center(child: Text('Item $index')),
             ),
           );
         },
-        itemWidth: 380.0 +
+        itemWidth: itemWidth +
             (padding *
                 2), // Width of each item + padding value, 2 => horizontal and vertical
         direction: Axis.horizontal, // Direction to arrange the children
