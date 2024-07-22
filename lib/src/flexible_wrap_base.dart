@@ -30,7 +30,7 @@ class FlexibleWrap extends StatelessWidget {
   final int length;
 
   /// The builder function to generate children with the given index and extra width.
-  final Widget Function(int index, double itemExtraWidth) builder;
+  final Widget Function(int index) builder;
 
   /// The width of each item in the wrap.
   final double itemWidth;
@@ -81,7 +81,10 @@ class FlexibleWrap extends StatelessWidget {
         verticalDirection: verticalDirection,
         runAlignment: runAlignment,
         children: List.generate(length, (index) {
-          return builder(index, extraWidth);
+          return SizedBox(
+            width: itemWidth + extraWidth,
+            child: builder(index),
+          );
         }),
       );
     });

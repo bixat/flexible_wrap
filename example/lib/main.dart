@@ -33,7 +33,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final padding = 8.0;
-  final spacing = 10.0;
+  final spacing = 5.0;
   final itemWidth = 380.0;
   @override
   Widget build(BuildContext context) {
@@ -42,27 +42,30 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: FlexibleWrap(
-        length: 35, // Number of children to display
-        runAlignment: WrapAlignment.start,
-        crossAxisAlignment: WrapCrossAlignment.end,
-        spacing: spacing,
-        builder: (int index, double itemExtraWidth) {
-          return Padding(
-            padding: EdgeInsets.all(padding),
-            child: Container(
-              height: 60,
-              color: Colors.blue,
-              width: itemWidth + itemExtraWidth,
-              child: Center(child: Text('Item $index')),
-            ),
-          );
-        },
-        itemWidth: itemWidth +
-            (padding *
-                2), // Width of each item + padding value, 2 => horizontal and vertical
-        direction: Axis.horizontal, // Direction to arrange the children
-        alignment: WrapAlignment.start, // Alignment of children within a run
+      body: SingleChildScrollView(
+        child: FlexibleWrap(
+          length: 35, // Number of children to display
+          runAlignment: WrapAlignment.start,
+          crossAxisAlignment: WrapCrossAlignment.end,
+          spacing: spacing,
+          builder: (int index) {
+            return Padding(
+              padding: EdgeInsets.all(padding),
+              child: Container(
+                height: 100,
+                decoration: BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.circular(8.0)),
+                child: Center(child: Text('Item $index')),
+              ),
+            );
+          },
+          itemWidth: itemWidth +
+              (padding *
+                  2), // Width of each item + padding value, 2 => horizontal and vertical
+          direction: Axis.horizontal, // Direction to arrange the children
+          alignment: WrapAlignment.start, // Alignment of children within a run
+        ),
       ),
     );
   }
