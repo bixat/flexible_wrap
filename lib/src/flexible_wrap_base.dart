@@ -30,7 +30,7 @@ class FlexibleWrap extends StatelessWidget {
   final int length;
 
   /// The builder function to generate children with the given index and extra width.
-  final Widget Function(int index, double itemExtraWIdth) builder;
+  final Widget Function(int index, double itemExtraWidth) builder;
 
   /// The width of each item in the wrap.
   final double itemWidth;
@@ -66,9 +66,10 @@ class FlexibleWrap extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraint) {
       double extraWidth = 0.0;
+      final double widthWithSpacing = itemWidth + spacing;
       if (constraint.maxWidth.isFinite) {
-        int items = (constraint.maxWidth / itemWidth).floor();
-        double remainder = constraint.maxWidth.remainder(itemWidth);
+        int items = (constraint.maxWidth / widthWithSpacing).floor();
+        double remainder = constraint.maxWidth.remainder(widthWithSpacing);
         extraWidth = remainder / items;
       }
       return Wrap(
