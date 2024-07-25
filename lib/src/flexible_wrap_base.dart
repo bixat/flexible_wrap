@@ -69,23 +69,27 @@ class FlexibleWrap extends StatelessWidget {
       final double widthWithSpacing = itemWidth + spacing;
       if (constraint.maxWidth.isFinite) {
         int items = (constraint.maxWidth / widthWithSpacing).floor();
-        double remainder = constraint.maxWidth.remainder(widthWithSpacing);
-        extraWidth = remainder / items;
+        final bool isOneLine = items >= length;
+        double remainder = constraint.maxWidth -
+            (widthWithSpacing * (isOneLine ? length : items));
+        extraWidth = remainder / (isOneLine ? length : items);
       }
-      return Wrap(
-        direction: direction,
-        textDirection: textDirection,
-        alignment: alignment,
-        spacing: spacing,
-        crossAxisAlignment: crossAxisAlignment,
-        verticalDirection: verticalDirection,
-        runAlignment: runAlignment,
-        children: List.generate(length, (index) {
-          return SizedBox(
-            width: itemWidth + extraWidth,
-            child: builder(index),
-          );
-        }),
+      return Center(
+        child: Wrap(
+          direction: direction,
+          textDirection: textDirection,
+          alignment: alignment,
+          spacing: spacing,
+          crossAxisAlignment: crossAxisAlignment,
+          verticalDirection: verticalDirection,
+          runAlignment: runAlignment,
+          children: List.generate(length, (index) {
+            return SizedBox(
+              width: itemWidth + extraWidth,
+              child: builder(index),
+            );
+          }),
+        ),
       );
     });
   }
