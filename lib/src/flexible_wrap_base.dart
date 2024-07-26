@@ -129,8 +129,8 @@ class MyRenderWrap extends RenderWrap {
     super.performLayout();
     var child = firstChild;
     final parentSize = constraints.maxWidth;
+    double extraWidth = 0.0;
     for (var i = 0; i < childCount; i++) {
-      double extraWidth = 0.0;
       final double widthWithSpacing = child!.size.width;
       if (parentSize.isFinite) {
         int items = (parentSize / widthWithSpacing).floor();
@@ -146,5 +146,6 @@ class MyRenderWrap extends RenderWrap {
           thisOffset.dy);
       child = childAfter(child);
     }
+    size = Size(size.width + extraWidth, size.height);
   }
 }
