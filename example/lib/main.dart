@@ -43,26 +43,20 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: SingleChildScrollView(
-        child: FlexibleWrap(
-          length: 35, // Number of children to display
-          runAlignment: WrapAlignment.start,
-          crossAxisAlignment: WrapCrossAlignment.end,
-          spacing: spacing,
-          builder: (int index) {
+        child: MyWrap(
+          children: List.generate(4, (int index) {
             return Padding(
               padding: EdgeInsets.all(padding),
               child: Container(
                 height: 100,
+                width: 100,
                 decoration: BoxDecoration(
                     color: Colors.blue,
                     borderRadius: BorderRadius.circular(8.0)),
                 child: Center(child: Text('Item $index')),
               ),
             );
-          },
-          itemWidth: itemWidth, // Width of each item
-          direction: Axis.horizontal, // Direction to arrange the children
-          alignment: WrapAlignment.start, // Alignment of children within a run
+          }).toList(),
         ),
       ),
     );

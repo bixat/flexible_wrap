@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 class FlexibleWrap extends StatelessWidget {
   /// Creates a widget that arranges its children in a wrap layout.
@@ -88,5 +89,51 @@ class FlexibleWrap extends StatelessWidget {
         }),
       );
     });
+  }
+}
+
+class MyWrap extends Wrap {
+  const MyWrap({super.key, super.children});
+
+  @override
+  RenderWrap createRenderObject(BuildContext context) {
+    return MyRenderWrap(
+      direction: direction,
+      alignment: alignment,
+      spacing: spacing,
+      runAlignment: runAlignment,
+      runSpacing: runSpacing,
+      crossAxisAlignment: crossAxisAlignment,
+      textDirection: textDirection ?? Directionality.maybeOf(context),
+      verticalDirection: verticalDirection,
+      clipBehavior: clipBehavior,
+    );
+  }
+}
+
+class MyRenderWrap extends RenderWrap {
+  MyRenderWrap({
+    super.direction,
+    super.alignment,
+    super.spacing,
+    super.runAlignment,
+    super.runSpacing,
+    super.crossAxisAlignment,
+    super.textDirection,
+    super.verticalDirection,
+    super.clipBehavior,
+  });
+
+  @override
+  void performLayout() {
+    super.performLayout();
+    for (var child = firstChild; child != null; child = childAfter(child)) {
+      child.layout(BoxConstraints.tight(Size(216, child.size.height)));
+      if (childAfter(child) == null) {
+        (child.parentData as WrapParentData).offset = Offset(
+            (child.parentData as WrapParentData).offset.dx + 100,
+            (child.parentData as WrapParentData).offset.dy);
+      }
+    }
   }
 }
