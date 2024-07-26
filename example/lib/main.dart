@@ -44,7 +44,8 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: SingleChildScrollView(
         child: FlexibleWrap(
-          length: 10, // Number of children to display
+          length: 4, // Number of children to display
+          isOneRowExpanded: true,
           spacing: spacing,
           builder: (int index) {
             return Padding(

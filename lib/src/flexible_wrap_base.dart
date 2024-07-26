@@ -24,7 +24,8 @@ class FlexibleWrap extends StatelessWidget {
       this.runAlignment = WrapAlignment.start,
       this.crossAxisAlignment = WrapCrossAlignment.start,
       this.verticalDirection = VerticalDirection.down,
-      this.clipBehavior});
+      this.clipBehavior,
+      this.isOneRowExpanded = false});
 
   /// The number of children to display in the wrap.
   final int length;
@@ -62,6 +63,8 @@ class FlexibleWrap extends StatelessWidget {
   /// If non-null, determines the clip behavior of the wrap.
   final Clip? clipBehavior;
 
+  final bool isOneRowExpanded;
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraint) {
@@ -69,10 +72,10 @@ class FlexibleWrap extends StatelessWidget {
       final double widthWithSpacing = itemWidth + spacing;
       if (constraint.maxWidth.isFinite) {
         int items = (constraint.maxWidth / widthWithSpacing).floor();
-        final bool isOneLine = items >= length;
+        final isOneRow = items >= length && isOneRowExpanded;
         double remainder = constraint.maxWidth -
-            (widthWithSpacing * (isOneLine ? length : items));
-        extraWidth = remainder / (isOneLine ? length : items);
+            (widthWithSpacing * (isOneRow ? length : items));
+        extraWidth = remainder / (isOneRow ? length : items);
       }
       return Center(
         child: Wrap(
