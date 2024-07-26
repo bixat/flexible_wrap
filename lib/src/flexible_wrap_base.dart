@@ -127,13 +127,24 @@ class MyRenderWrap extends RenderWrap {
   @override
   void performLayout() {
     super.performLayout();
-    for (var child = firstChild; child != null; child = childAfter(child)) {
-      child.layout(BoxConstraints.tight(Size(216, child.size.height)));
-      if (childAfter(child) == null) {
-        (child.parentData as WrapParentData).offset = Offset(
-            (child.parentData as WrapParentData).offset.dx + 100,
-            (child.parentData as WrapParentData).offset.dy);
+    var child = firstChild;
+    final parentSize = constraints.maxWidth;
+    for (var i = 0; i < childCount; i++) {
+      double extraWidth = 0.0;
+      final double widthWithSpacing = child!.size.width;
+      if (parentSize.isFinite) {
+        int items = (parentSize / widthWithSpacing).floor();
+        double remainder = parentSize.remainder(widthWithSpacing);
+        extraWidth = remainder / items;
       }
+      final newWidth = extraWidth + child.size.width;
+      final thisOffset = (child.parentData as WrapParentData).offset;
+      child.layout(BoxConstraints.tight(Size(newWidth, child.size.height)));
+      (child.parentData as WrapParentData).offset = Offset(
+          thisOffset.dx +
+              (extraWidth * (thisOffset.dx / widthWithSpacing).floor()),
+          thisOffset.dy);
+      child = childAfter(child);
     }
   }
 }

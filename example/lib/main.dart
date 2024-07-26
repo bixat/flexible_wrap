@@ -44,12 +44,12 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: SingleChildScrollView(
         child: MyWrap(
-          children: List.generate(4, (int index) {
+          children: List.generate(7, (int index) {
             return Padding(
               padding: EdgeInsets.all(padding),
               child: Container(
                 height: 100,
-                width: 100,
+                width: 300,
                 decoration: BoxDecoration(
                     color: Colors.blue,
                     borderRadius: BorderRadius.circular(8.0)),
