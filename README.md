@@ -83,7 +83,7 @@ FlexibleWrap(
 
 FlexibleWrap offers several customization options to tailor the layout to your needs:
 
-- **one row behavior**: Specify on row behavior using `isOneRowExpanded`.
+- **one row behavior**: Specify one row behavior using `isOneRowExpanded`.
 
 ## Contributing
 
