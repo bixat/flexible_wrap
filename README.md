@@ -13,6 +13,8 @@ FlexibleWrap is a Flutter package designed to provide a flexible and customizabl
 - **Responsive Design**: Supports both horizontal and vertical directions, making it suitable for a wide range of applications.
 - **Flexible Spacing**: Adjusts spacing between items and runs to achieve the desired visual appearance.
 
+_Note: We currently support [only items that have the same width](https://github.com/bixat/flexible_wrap/issues/10); [height direction is not supported yet](https://github.com/bixat/flexible_wrap/issues/11)_
+
 ## Getting Started
 
 To get started with FlexibleWrap, add it to your `pubspec.yaml` file:
@@ -68,4 +70,3 @@ Contributions to FlexibleWrap are welcome! Please feel free to submit pull reque
 ## License
 
 FlexibleWrap is licensed under the MIT License. See the LICENSE file for details.
-
