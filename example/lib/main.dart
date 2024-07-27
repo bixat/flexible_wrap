@@ -53,7 +53,29 @@ class _MyHomePageState extends State<MyHomePage> {
                 decoration: BoxDecoration(
                     color: Colors.blue,
                     borderRadius: BorderRadius.circular(8.0)),
-                child: Center(child: Text('Item $index')),
+                child: const Center(
+                  child: ListTile(
+                    title: Text(
+                      "Lorem Ipsum is simply dummy text",
+                      style: TextStyle(color: Colors.white),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    subtitle: Text(
+                      "Lorem Ipsum has been the industry's standard",
+                      style: TextStyle(color: Colors.white),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    leading: Icon(
+                      Icons.insert_emoticon,
+                      color: Colors.white,
+                      size: 60.0,
+                    ),
+                    trailing: Icon(
+                      Icons.favorite,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
               ),
             );
           }).toList(),
