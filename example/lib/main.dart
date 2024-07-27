@@ -33,7 +33,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final padding = 8.0;
-  final spacing = 5.0;
   final itemWidth = 380.0;
   @override
   Widget build(BuildContext context) {
