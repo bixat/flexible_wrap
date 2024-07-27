@@ -40,10 +40,10 @@ class RenderFlexibleWrap extends RenderWrap {
       final newWidth = extraWidth + widthWithSpacing;
       final thisOffset = (child.parentData as WrapParentData).offset;
       child.layout(BoxConstraints.tight(Size(newWidth, child.size.height)));
-      (child.parentData as WrapParentData).offset = Offset(
-          thisOffset.dx +
-              (extraWidth * (thisOffset.dx / widthWithSpacing).floor()),
-          thisOffset.dy);
+      final newOffset = thisOffset.dx +
+          (extraWidth * (thisOffset.dx / widthWithSpacing).floor());
+      (child.parentData as WrapParentData).offset =
+          Offset(newOffset, thisOffset.dy);
       child = childAfter(child);
     }
     size = Size(size.width + extraWidth * baseItems, size.height);
