@@ -46,6 +46,6 @@ class RenderFlexibleWrap extends RenderWrap {
           Offset(newOffset, thisOffset.dy);
       child = childAfter(child);
     }
-    size = Size(size.width + extraWidth * baseItems, size.height);
+    size = Size(constraints.maxWidth, size.height);
   }
 }
