@@ -6,8 +6,7 @@ class RenderFlexibleWrap extends RenderWrap {
   ///
   /// The [isOneRowExpanded] parameter decides whether to expand a single row to fill the available space.
   RenderFlexibleWrap(
-      {super.direction,
-      super.alignment,
+      {super.alignment,
       super.spacing,
       super.runAlignment,
       super.runSpacing,

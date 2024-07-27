@@ -15,7 +15,7 @@ class FlexibleWrap extends Wrap {
       {super.key,
       super.children,
       super.textDirection,
-      super.direction,
+      // super.direction,
       super.alignment,
       super.spacing,
       super.runAlignment,
@@ -30,7 +30,7 @@ class FlexibleWrap extends Wrap {
   @override
   RenderWrap createRenderObject(BuildContext context) {
     return RenderFlexibleWrap(
-        direction: direction,
+        // direction: direction,
         alignment: alignment,
         spacing: spacing,
         runAlignment: runAlignment,
