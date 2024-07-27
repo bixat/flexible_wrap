@@ -24,7 +24,8 @@ class FlexibleWrap extends StatelessWidget {
       this.runAlignment = WrapAlignment.start,
       this.crossAxisAlignment = WrapCrossAlignment.start,
       this.verticalDirection = VerticalDirection.down,
-      this.clipBehavior});
+      this.clipBehavior,
+      this.isOneRowExpanded = false});
 
   /// The number of children to display in the wrap.
   final int length;
@@ -62,6 +63,8 @@ class FlexibleWrap extends StatelessWidget {
   /// If non-null, determines the clip behavior of the wrap.
   final Clip? clipBehavior;
 
+  final bool isOneRowExpanded;
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraint) {
@@ -69,23 +72,27 @@ class FlexibleWrap extends StatelessWidget {
       final double widthWithSpacing = itemWidth + spacing;
       if (constraint.maxWidth.isFinite) {
         int items = (constraint.maxWidth / widthWithSpacing).floor();
-        double remainder = constraint.maxWidth.remainder(widthWithSpacing);
-        extraWidth = remainder / items;
+        final isOneRow = items >= length && isOneRowExpanded;
+        double remainder = constraint.maxWidth -
+            (widthWithSpacing * (isOneRow ? length : items));
+        extraWidth = remainder / (isOneRow ? length : items);
       }
-      return Wrap(
-        direction: direction,
-        textDirection: textDirection,
-        alignment: alignment,
-        spacing: spacing,
-        crossAxisAlignment: crossAxisAlignment,
-        verticalDirection: verticalDirection,
-        runAlignment: runAlignment,
-        children: List.generate(length, (index) {
-          return SizedBox(
-            width: itemWidth + extraWidth,
-            child: builder(index),
-          );
-        }),
+      return Center(
+        child: Wrap(
+          direction: direction,
+          textDirection: textDirection,
+          alignment: alignment,
+          spacing: spacing,
+          crossAxisAlignment: crossAxisAlignment,
+          verticalDirection: verticalDirection,
+          runAlignment: runAlignment,
+          children: List.generate(length, (index) {
+            return SizedBox(
+              width: itemWidth + extraWidth,
+              child: builder(index),
+            );
+          }),
+        ),
       );
     });
   }

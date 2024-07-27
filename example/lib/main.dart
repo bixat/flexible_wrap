@@ -33,7 +33,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final padding = 8.0;
-  final spacing = 5.0;
+  final spacing = 0.0;
   final itemWidth = 380.0;
   @override
   Widget build(BuildContext context) {
@@ -44,9 +44,8 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: SingleChildScrollView(
         child: FlexibleWrap(
-          length: 35, // Number of children to display
-          runAlignment: WrapAlignment.start,
-          crossAxisAlignment: WrapCrossAlignment.end,
+          length: 4, // Number of children to display
+          isOneRowExpanded: true,
           spacing: spacing,
           builder: (int index) {
             return Padding(
@@ -61,7 +60,6 @@ class _MyHomePageState extends State<MyHomePage> {
             );
           },
           itemWidth: itemWidth, // Width of each item
-          direction: Axis.horizontal, // Direction to arrange the children
           alignment: WrapAlignment.start, // Alignment of children within a run
         ),
       ),
