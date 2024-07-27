@@ -43,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: SingleChildScrollView(
-        child: MyWrap(
+        child: FlexibleWrap(
           children: List.generate(7, (int index) {
             return Padding(
               padding: EdgeInsets.all(padding),
