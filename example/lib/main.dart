@@ -44,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: FlexibleWrap(
           isOneRowExpanded: true,
           spacing: 12.0,
-          children: List.generate(3, (int index) {
+          children: List.generate(20, (int index) {
             return Padding(
               padding: EdgeInsets.all(padding),
               child: Container(
