@@ -1,6 +1,10 @@
 import 'package:flutter/rendering.dart';
 
+/// A custom RenderBox that allows flexible wrapping of children within a given layout constraint.
 class RenderFlexibleWrap extends RenderWrap {
+  /// Constructs a [RenderFlexibleWrap].
+  ///
+  /// The [isOneRowExpanded] parameter decides whether to expand a single row to fill the available space.
   RenderFlexibleWrap(
       {super.direction,
       super.alignment,
@@ -12,7 +16,10 @@ class RenderFlexibleWrap extends RenderWrap {
       super.verticalDirection,
       super.clipBehavior,
       this.isOneRowExpanded = false});
+
+  /// Indicates whether a single row should be expanded to fill the available space.
   final bool isOneRowExpanded;
+
   @override
   void performLayout() {
     super.performLayout();
