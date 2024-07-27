@@ -28,7 +28,8 @@ class RenderFlexibleWrap extends RenderWrap {
     double extraWidth = 0.0;
     int baseItems = 0;
     for (var i = 0; i < childCount; i++) {
-      final double widthWithSpacing = child!.size.width + spacing;
+      if (child!.size.width == parentWidth) return;
+      final double widthWithSpacing = child.size.width + spacing;
       if (parentWidth.isFinite) {
         final items = (parentWidth / widthWithSpacing).floor();
         final isOneRow = items >= childCount && isOneRowExpanded;
@@ -36,7 +37,7 @@ class RenderFlexibleWrap extends RenderWrap {
         double remainder = parentWidth - (widthWithSpacing * baseItems);
         extraWidth = remainder / baseItems;
       }
-      final newWidth = extraWidth + child.size.width;
+      final newWidth = extraWidth + widthWithSpacing;
       final thisOffset = (child.parentData as WrapParentData).offset;
       child.layout(BoxConstraints.tight(Size(newWidth, child.size.height)));
       (child.parentData as WrapParentData).offset = Offset(
