@@ -15,20 +15,23 @@ class FlexibleWrap extends Wrap {
       super.runAlignment,
       super.crossAxisAlignment,
       super.verticalDirection,
-      super.clipBehavior});
+      super.clipBehavior,
+      this.isOneRowExpanded = false});
+
+  final bool isOneRowExpanded;
 
   @override
   RenderWrap createRenderObject(BuildContext context) {
     return RenderFlexibleWrap(
-      direction: direction,
-      alignment: alignment,
-      spacing: spacing,
-      runAlignment: runAlignment,
-      runSpacing: runSpacing,
-      crossAxisAlignment: crossAxisAlignment,
-      textDirection: textDirection ?? Directionality.maybeOf(context),
-      verticalDirection: verticalDirection,
-      clipBehavior: clipBehavior,
-    );
+        direction: direction,
+        alignment: alignment,
+        spacing: spacing,
+        runAlignment: runAlignment,
+        runSpacing: runSpacing,
+        crossAxisAlignment: crossAxisAlignment,
+        textDirection: textDirection ?? Directionality.maybeOf(context),
+        verticalDirection: verticalDirection,
+        clipBehavior: clipBehavior,
+        isOneRowExpanded: isOneRowExpanded);
   }
 }

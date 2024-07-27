@@ -44,7 +44,8 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: SingleChildScrollView(
         child: FlexibleWrap(
-          children: List.generate(7, (int index) {
+          isOneRowExpanded: true,
+          children: List.generate(3, (int index) {
             return Padding(
               padding: EdgeInsets.all(padding),
               child: Container(
