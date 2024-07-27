@@ -8,10 +8,13 @@ FlexibleWrap is a Flutter package designed to provide a flexible and customizabl
 
 ## Features
 
-- **Customizable Layout**: Easily customize the layout of your widgets with various parameters such as direction, alignment, spacing, and more.
-- **Dynamic Wrapping**: Automatically wraps widgets onto the next line based on the available space, ensuring optimal use of screen real estate.
-- **Responsive Design**: Supports both horizontal and vertical directions, making it suitable for a wide range of applications.
+## Features
+
+- **Dynamic Wrapping**: Automatically wraps widgets onto the next line based on the available space.
 - **Flexible Spacing**: Adjusts spacing between items and runs to achieve the desired visual appearance.
+- **Expanded Items**: Expands the items to fill the available space on the row.
+
+_Note: We currently support [only items that have the same width](https://github.com/bixat/flexible_wrap/issues/10); [height direction is not supported yet](https://github.com/bixat/flexible_wrap/issues/11)_
 
 ## Getting Started
 
@@ -36,30 +39,51 @@ Here's a basic example of how to use FlexibleWrap:
 
 ```dart
 FlexibleWrap(
-  length: 10, // Number of children to display
-  builder: (int index, double itemExtraWidth) {
-    return Container(
-      color: Colors.blue,
-      width: 100.0 + itemExtraWidth, // Adjust width based on extra width
-      child: Text('Item $index'),
+  isOneRowExpanded: true,
+  spacing: 12.0,
+  children: List.generate(3, (int index) {
+    return Padding(
+      padding: EdgeInsets.all(padding),
+      child: Container(
+        height: 100,
+        width: 300,
+        decoration: BoxDecoration(
+            color: Colors.blue,
+            borderRadius: BorderRadius.circular(8.0)),
+        child: const Center(
+          child: ListTile(
+            title: Text(
+              "Lorem Ipsum is simply dummy text",
+              style: TextStyle(color: Colors.white),
+              overflow: TextOverflow.ellipsis,
+            ),
+            subtitle: Text(
+              "Lorem Ipsum has been the industry's standard",
+              style: TextStyle(color: Colors.white),
+              overflow: TextOverflow.ellipsis,
+            ),
+            leading: Icon(
+              Icons.insert_emoticon,
+              color: Colors.white,
+              size: 60.0,
+            ),
+            trailing: Icon(
+              Icons.favorite,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
     );
-  },
-  itemWidth: 100.0, // Width of each item
-  direction: Axis.horizontal, // Direction to arrange the children
-  alignment: WrapAlignment.start, // Alignment of children within a run
-  spacing: 8.0, // Spacing between children in the main axis
-)
+  }).toList(),
+),
 ```
 
 ## Customization
 
 FlexibleWrap offers several customization options to tailor the layout to your needs:
 
-- **Direction**: Specify whether the children should be arranged horizontally (`Axis.horizontal`) or vertically (`Axis.vertical`).
-- **Alignment**: Set how the children within a run should be placed along the main axis (`WrapAlignment.start`, `end`, `center`, etc.).
-- **Spacing**: Define the amount of spacing between the children in the main axis.
-- **Run Alignment**: Determine how the runs themselves should be placed in the cross axis (`WrapAlignment.start`, `end`, `center`, etc.).
-- **Cross Axis Alignment**: Align the children within a run relative to each other in the cross axis (`WrapCrossAlignment.start`, `end`, `center`, etc.).
+- **one row behavior**: Specify one row behavior using `isOneRowExpanded`.
 
 ## Contributing
 
@@ -68,4 +92,3 @@ Contributions to FlexibleWrap are welcome! Please feel free to submit pull reque
 ## License
 
 FlexibleWrap is licensed under the MIT License. See the LICENSE file for details.
-

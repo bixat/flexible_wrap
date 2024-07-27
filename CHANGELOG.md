@@ -10,6 +10,7 @@
 
 * Update builder to return only index instead of index and extra width
 
-## 0.0.5
+## 1.0.0
 
-* Handled oneline case
+* Introduced a custom Render Object to enhance the performance of the FlexibleWrap widget.
+* Added isOneRowExpanded flag for control over one row behavior
