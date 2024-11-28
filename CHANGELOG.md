@@ -14,3 +14,7 @@
 
 * Introduced a custom Render Object to enhance the performance of the FlexibleWrap widget.
 * Added isOneRowExpanded flag for control over one row behavior
+
+## 1.0.1
+
+* Fixed hidden items issue
