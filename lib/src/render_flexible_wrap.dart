@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/rendering.dart';
 
 /// A custom RenderBox that allows flexible wrapping of children within a given layout constraint.
@@ -26,6 +28,8 @@ class RenderFlexibleWrap extends RenderWrap {
     final parentWidth = constraints.maxWidth;
     double extraWidth = 0.0;
     int baseItems = 0;
+    double x = 0;
+    double y = 0;
     for (var i = 0; i < childCount; i++) {
       if (child!.size.width == parentWidth) return;
       final double widthWithSpacing = child.size.width + spacing;
@@ -37,14 +41,15 @@ class RenderFlexibleWrap extends RenderWrap {
         extraWidth = remainder / baseItems;
       }
       final newWidth = extraWidth + widthWithSpacing;
-      final thisOffset = (child.parentData as WrapParentData).offset;
       child.layout(BoxConstraints.tight(Size(newWidth, child.size.height)));
-      final newOffset = thisOffset.dx +
-          (extraWidth * (thisOffset.dx / widthWithSpacing).floor());
-      (child.parentData as WrapParentData).offset =
-          Offset(newOffset, thisOffset.dy);
+      (child.parentData as WrapParentData).offset = Offset(x, y);
       child = childAfter(child);
+      x += newWidth;
+      if (x >= parentWidth) {
+        x = 0;
+        y += child?.size.height ?? 0;
+      }
     }
-    size = Size(constraints.maxWidth, size.height);
+    size = Size(constraints.maxWidth, max(size.height, y));
   }
 }
