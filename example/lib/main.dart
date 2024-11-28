@@ -41,44 +41,47 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: SingleChildScrollView(
-        child: FlexibleWrap(
-          isOneRowExpanded: true,
-          spacing: 12.0,
-          children: List.generate(20, (int index) {
-            return Padding(
-              padding: EdgeInsets.all(padding),
-              child: Container(
-                height: 100,
-                width: 300,
-                decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(8.0)),
-                child: const Center(
-                  child: ListTile(
-                    title: Text(
-                      "Lorem Ipsum is simply dummy text",
-                      style: TextStyle(color: Colors.white),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    subtitle: Text(
-                      "Lorem Ipsum has been the industry's standard",
-                      style: TextStyle(color: Colors.white),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    leading: Icon(
-                      Icons.insert_emoticon,
-                      color: Colors.white,
-                      size: 60.0,
-                    ),
-                    trailing: Icon(
-                      Icons.favorite,
-                      color: Colors.white,
+        child: ColoredBox(
+          color: Colors.brown,
+          child: FlexibleWrap(
+            isOneRowExpanded: true,
+            spacing: 12.0,
+            children: List.generate(20, (int index) {
+              return Padding(
+                padding: EdgeInsets.all(padding),
+                child: Container(
+                  height: 100,
+                  width: 300,
+                  decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.circular(8.0)),
+                  child: const Center(
+                    child: ListTile(
+                      title: Text(
+                        "Lorem Ipsum is simply dummy text",
+                        style: TextStyle(color: Colors.white),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      subtitle: Text(
+                        "Lorem Ipsum has been the industry's standard",
+                        style: TextStyle(color: Colors.white),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      leading: Icon(
+                        Icons.insert_emoticon,
+                        color: Colors.white,
+                        size: 60.0,
+                      ),
+                      trailing: Icon(
+                        Icons.favorite,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            );
-          }).toList(),
+              );
+            }).toList(),
+          ),
         ),
       ),
     );
