@@ -18,3 +18,7 @@
 ## 1.0.1
 
 * Fixed hidden items issue
+
+## 1.0.2
+
+* Fixed parent max height issue
