@@ -1,6 +1,13 @@
 # FlexibleWrap
 
-FlexibleWrap is a Flutter package designed to provide a flexible and customizable way to arrange widgets in a wrap layout. It allows developers to create dynamic layouts where widgets can wrap onto the next line based on available space, similar to how items behave in a shopping cart or a list of cards.
+FlexibleWrap is a Flutter widget that provides an advanced wrap layout with flexible spacing and RTL support. It automatically distributes available space between items in a row, similar to Wrap widget but with additional features:
+
+- Automatically expands items to fill available space in a single row
+- Supports right-to-left (RTL) text direction
+- Maintains consistent spacing between items
+- Handles dynamic wrapping based on parent constraints
+
+Perfect for implementing uniform grid layouts like product cards, image galleries, or any UI that requires evenly-spaced wrapped items.
 
 ## Showcase
 
@@ -8,11 +15,10 @@ FlexibleWrap is a Flutter package designed to provide a flexible and customizabl
 
 ## Features
 
-## Features
-
 - **Dynamic Wrapping**: Automatically wraps widgets onto the next line based on the available space.
 - **Flexible Spacing**: Adjusts spacing between items and runs to achieve the desired visual appearance.
 - **Expanded Items**: Expands the items to fill the available space on the row.
+- **RTL Support**: Provides support for right-to-left text direction, ensuring proper layout and alignment for RTL languages.
 
 _Note: We currently support [only items that have the same width](https://github.com/bixat/flexible_wrap/issues/10); [height direction is not supported yet](https://github.com/bixat/flexible_wrap/issues/11)_
 
