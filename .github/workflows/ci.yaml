@@ -1,4 +1,4 @@
-name: Flutter CI
+name: FlexibleWrap CI
 
 on:
   pull_request:
