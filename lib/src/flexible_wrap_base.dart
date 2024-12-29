@@ -15,13 +15,7 @@ class FlexibleWrap extends Wrap {
       {super.key,
       super.children,
       super.textDirection,
-      // super.direction,
-      super.alignment,
       super.spacing,
-      super.runAlignment,
-      super.crossAxisAlignment,
-      super.verticalDirection,
-      super.clipBehavior,
       this.isOneRowExpanded = false});
 
   /// Whether a single row of children can expand to fill available space.
@@ -30,15 +24,8 @@ class FlexibleWrap extends Wrap {
   @override
   RenderWrap createRenderObject(BuildContext context) {
     return RenderFlexibleWrap(
-        // direction: direction,
-        alignment: alignment,
         spacing: spacing,
-        runAlignment: runAlignment,
-        runSpacing: runSpacing,
-        crossAxisAlignment: crossAxisAlignment,
         textDirection: textDirection ?? Directionality.maybeOf(context),
-        verticalDirection: verticalDirection,
-        clipBehavior: clipBehavior,
         isOneRowExpanded: isOneRowExpanded);
   }
 }
