@@ -44,9 +44,9 @@ class _MyHomePageState extends State<MyHomePage> {
         child: ColoredBox(
           color: Colors.brown,
           child: FlexibleWrap(
-            isOneRowExpanded: true,
             spacing: 12.0,
-            children: List.generate(20, (int index) {
+            textDirection: TextDirection.rtl,
+            children: List.generate(6, (int index) {
               return Padding(
                 padding: EdgeInsets.all(padding),
                 child: Container(
