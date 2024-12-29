@@ -67,8 +67,7 @@ void main() {
       layout(renderFlexibleWrap,
           constraints: BoxConstraints.tight(const Size(200.0, 100.0)));
 
-      final totalWidth =
-          child1.size.width + child2.size.width + 10.0;
+      final totalWidth = child1.size.width + child2.size.width + 10.0;
       expect(totalWidth, equals(210.0));
     });
 
@@ -89,8 +88,7 @@ void main() {
 
       final child1Pos = (child1.parentData as WrapParentData).offset.dx;
       final child2Pos = (child2.parentData as WrapParentData).offset.dx;
-      expect(child2Pos - (child1Pos + child1.size.width),
-          equals(0.0));
+      expect(child2Pos - (child1Pos + child1.size.width), equals(0.0));
     });
   });
 }
