@@ -1,87 +1,96 @@
-// test/flexible_wrap_widget_test.dart
-
-import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flexible_wrap/flexible_wrap.dart';
+import 'package:flexible_wrap/src/render_flexible_wrap.dart';
 
 void main() {
-  group('FlexibleWrap Widget Tests', () {
-    Widget buildTestableWidget(Widget widget) {
-      return MaterialApp(
-        home: Scaffold(
-          body: Center(
-            child: SizedBox(
-              width: 400,
-              height: 600,
-              child: widget,
-            ),
-          ),
-        ),
+  TestWidgetsFlutterBinding.ensureInitialized();
+
+  void layout(RenderBox box, {required BoxConstraints constraints}) {
+    box.layout(constraints, parentUsesSize: true);
+  }
+
+  group('RenderFlexibleWrap', () {
+    late RenderFlexibleWrap renderFlexibleWrap;
+    late RenderBox child1;
+    late RenderBox child2;
+    late RenderBox child3;
+
+    setUp(() {
+      renderFlexibleWrap = RenderFlexibleWrap(
+        spacing: 10.0,
+        textDirection: TextDirection.ltr,
+        isOneRowExpanded: false,
       );
-    }
 
-    testWidgets('FlexibleWrap renders correct number of items',
-        (WidgetTester tester) async {
-      await tester.pumpWidget(buildTestableWidget(
-        FlexibleWrap(
-          isOneRowExpanded: false,
-          spacing: 12.0,
-          children: List.generate(5, (int index) {
-            return Container(
-              height: 100,
-              width: 200,
-              decoration: BoxDecoration(color: Colors.blue.withOpacity(index % 8)),
-              child: Center(child: Text('Item $index')),
-            );
-          }),
-        ),
-      ));
-
-      expect(find.byType(Container), findsNWidgets(5));
+      child1 = RenderConstrainedBox(
+        additionalConstraints: BoxConstraints.tight(const Size(50.0, 50.0)),
+      );
+      child2 = RenderConstrainedBox(
+        additionalConstraints: BoxConstraints.tight(const Size(50.0, 50.0)),
+      );
+      child3 = RenderConstrainedBox(
+        additionalConstraints: BoxConstraints.tight(const Size(50.0, 50.0)),
+      );
     });
 
-    testWidgets('FlexibleWrap handles item overflow',
-        (WidgetTester tester) async {
-      await tester.pumpWidget(buildTestableWidget(
-        FlexibleWrap(
-          isOneRowExpanded: false,
-          spacing: 12.0,
-          children: List.generate(10, (int index) {
-            return Container(
-              height: 100,
-              width: 200,
-              decoration: BoxDecoration(color: Colors.blue.withOpacity(index % 8)),
-              child: Center(child: Text('Item $index')),
-            );
-          }),
-        ),
-      ));
+    test('basic layout properties', () {
+      renderFlexibleWrap.addAll([child1, child2, child3]);
+      layout(renderFlexibleWrap,
+          constraints: BoxConstraints.tight(const Size(200.0, 100.0)));
 
-      expect(find.byType(Container),
-          findsNWidgets(5)); // Only 5 items should be visible
+      expect(renderFlexibleWrap.size.width, equals(200.0));
+      expect(child1.size.width, greaterThan(50.0)); // Should be expanded
     });
 
-    testWidgets('FlexibleWrap handles orientation change',
-        (WidgetTester tester) async {
-      await tester.pumpWidget(buildTestableWidget(
-        FlexibleWrap(
-          isOneRowExpanded: false,
-          spacing: 12.0,
-          children: List.generate(5, (int index) {
-            return Container(
-              height: 100,
-              width: 200,
-              decoration: BoxDecoration(color: Colors.blue.withOpacity(index % 8)),
-              child: Center(child: Text('Item $index')),
-            );
-          }),
-        ),
-      ));
+    test('RTL support', () {
+      renderFlexibleWrap = RenderFlexibleWrap(
+        spacing: 10.0,
+        textDirection: TextDirection.rtl,
+        isOneRowExpanded: false,
+      );
+      renderFlexibleWrap.addAll([child1, child2]);
+      layout(renderFlexibleWrap,
+          constraints: BoxConstraints.tight(const Size(200.0, 100.0)));
 
-      await tester.pumpAndSettle();
+      final child1Pos = (child1.parentData as WrapParentData).offset.dx;
+      final child2Pos = (child2.parentData as WrapParentData).offset.dx;
+      expect(child1Pos, greaterThan(child2Pos)); // RTL ordering
+    });
 
-      expect(
-          find.byType(Container), findsNWidgets(2)); // Should wrap to 2 columns
+    test('single row expansion', () {
+      renderFlexibleWrap = RenderFlexibleWrap(
+        spacing: 10.0,
+        textDirection: TextDirection.ltr,
+        isOneRowExpanded: true,
+      );
+      renderFlexibleWrap.addAll([child1, child2]);
+      layout(renderFlexibleWrap,
+          constraints: BoxConstraints.tight(const Size(200.0, 100.0)));
+
+      final totalWidth =
+          child1.size.width + child2.size.width + 10.0;
+      expect(totalWidth, equals(210.0));
+    });
+
+    test('multi-row wrapping', () {
+      renderFlexibleWrap.addAll([child1, child2, child3]);
+      layout(renderFlexibleWrap,
+          constraints: BoxConstraints.tight(const Size(120.0, 200.0)));
+
+      final child1Y = (child1.parentData as WrapParentData).offset.dy;
+      final child3Y = (child3.parentData as WrapParentData).offset.dy;
+      expect(child3Y, greaterThan(child1Y)); // Should wrap to next line
+    });
+
+    test('spacing calculation', () {
+      renderFlexibleWrap.addAll([child1, child2]);
+      layout(renderFlexibleWrap,
+          constraints: BoxConstraints.tight(const Size(200.0, 100.0)));
+
+      final child1Pos = (child1.parentData as WrapParentData).offset.dx;
+      final child2Pos = (child2.parentData as WrapParentData).offset.dx;
+      expect(child2Pos - (child1Pos + child1.size.width),
+          equals(0.0));
     });
   });
 }
