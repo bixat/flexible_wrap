@@ -6,15 +6,7 @@ class RenderFlexibleWrap extends RenderWrap {
   ///
   /// The [isOneRowExpanded] parameter decides whether to expand a single row to fill the available space.
   RenderFlexibleWrap(
-      {super.alignment,
-      super.spacing,
-      super.runAlignment,
-      super.runSpacing,
-      super.crossAxisAlignment,
-      super.textDirection,
-      super.verticalDirection,
-      super.clipBehavior,
-      this.isOneRowExpanded = false});
+      {super.spacing, super.textDirection, this.isOneRowExpanded = false});
 
   /// Indicates whether a single row should be expanded to fill the available space.
   final bool isOneRowExpanded;
@@ -23,15 +15,18 @@ class RenderFlexibleWrap extends RenderWrap {
   void performLayout() {
     super.performLayout();
     var child = firstChild;
+    final isRtl = textDirection == TextDirection.rtl;
     final parentWidth = constraints.maxWidth;
     double extraWidth = 0.0;
     int baseItems = 0;
     double maxHeight = 0;
-    double x = 0;
+    double x = isRtl ? parentWidth : 0; // Start from right edge if RTL
     double y = 0;
+
     for (var i = 0; i < childCount; i++) {
       if (child!.size.width == parentWidth) return;
       final double widthWithSpacing = child.size.width + spacing;
+
       if (parentWidth.isFinite) {
         final items = (parentWidth / widthWithSpacing).floor();
         final isOneRow = items >= childCount && isOneRowExpanded;
@@ -39,15 +34,24 @@ class RenderFlexibleWrap extends RenderWrap {
         double remainder = parentWidth - (widthWithSpacing * baseItems);
         extraWidth = remainder / baseItems;
       }
+
       final newWidth = extraWidth + widthWithSpacing;
       child.layout(BoxConstraints.tight(Size(newWidth, child.size.height)),
           parentUsesSize: true);
-      (child.parentData as WrapParentData).offset = Offset(x, y);
-      x += newWidth;
-      if (x >= parentWidth) {
-        x = 0;
+
+      // Adjust x position based on text direction
+      final childX = isRtl ? (x - newWidth) : x;
+      (child.parentData as WrapParentData).offset = Offset(childX, y);
+
+      // Update x position based on text direction
+      x = isRtl ? (x - newWidth) : (x + newWidth);
+
+      // Handle wrapping to next line
+      if (isRtl ? (x <= 0) : (x >= parentWidth)) {
+        x = isRtl ? parentWidth : 0;
         y += child.size.height;
       }
+
       maxHeight =
           (child.parentData as WrapParentData).offset.dy + child.size.height;
       child = childAfter(child);

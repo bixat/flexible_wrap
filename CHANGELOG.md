@@ -22,3 +22,7 @@
 ## 1.0.2
 
 * Fixed parent max height issue
+
+## 1.0.3
+
+* Support RTL Direction
