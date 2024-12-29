@@ -20,7 +20,7 @@ class RenderFlexibleWrap extends RenderWrap {
     double extraWidth = 0.0;
     int baseItems = 0;
     double maxHeight = 0;
-    double x = isRtl ? parentWidth : 0; // Start from right edge if RTL
+    double x = isRtl ? parentWidth : 0;
     double y = 0;
 
     for (var i = 0; i < childCount; i++) {
@@ -47,7 +47,7 @@ class RenderFlexibleWrap extends RenderWrap {
       x = isRtl ? (x - newWidth) : (x + newWidth);
 
       // Handle wrapping to next line
-      if (isRtl ? (x <= 0) : (x >= parentWidth)) {
+      if (isRtl ? (x <= widthWithSpacing) : (x >= parentWidth)) {
         x = isRtl ? parentWidth : 0;
         y += child.size.height;
       }

@@ -26,3 +26,7 @@
 ## 1.0.3
 
 * Support RTL Direction
+
+## 1.0.4
+
+* Fixed RTL Direction issue
