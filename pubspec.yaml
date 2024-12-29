@@ -1,7 +1,7 @@
 name: flexible_wrap
 description: Widget that arranges its children in a flexible wrap layout, allowing them to expand according to available space while maintaining the specified layout properties.
 
-version: 1.0.3
+version: 1.0.4
 homepage: https://github.com/bixat/flexible_wrap
 
 environment:
