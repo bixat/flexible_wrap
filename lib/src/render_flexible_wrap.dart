@@ -50,6 +50,7 @@ class RenderFlexibleWrap extends RenderWrap {
       if (isRtl ? (x <= widthWithSpacing) : (x >= parentWidth)) {
         x = isRtl ? parentWidth : 0;
         y += child.size.height;
+        y += runSpacing;
       }
 
       maxHeight =
