@@ -43,7 +43,7 @@ class RenderFlexibleWrap extends RenderWrap {
           parentUsesSize: true);
 
       // Adjust x position based on text direction
-      final childX = isRtl ? (x - newWidth - spacing / 2) : x + spacing;
+      final childX = isRtl ? (x - newWidth - spacing / 2) : x + spacing / 2;
       (child.parentData as WrapParentData).offset = Offset(childX, y);
 
       // Update x position based on text direction
