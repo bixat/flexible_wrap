@@ -6,7 +6,10 @@ class RenderFlexibleWrap extends RenderWrap {
   ///
   /// The [isOneRowExpanded] parameter decides whether to expand a single row to fill the available space.
   RenderFlexibleWrap(
-      {super.spacing, super.textDirection, this.isOneRowExpanded = false});
+      {super.spacing,
+      super.textDirection,
+      super.runSpacing,
+      this.isOneRowExpanded = false});
 
   /// Indicates whether a single row should be expanded to fill the available space.
   final bool isOneRowExpanded;
@@ -25,29 +28,29 @@ class RenderFlexibleWrap extends RenderWrap {
 
     for (var i = 0; i < childCount; i++) {
       if (child!.size.width == parentWidth) return;
-      final double widthWithSpacing = child.size.width + spacing;
+      final double childWidth = child.size.width;
 
       if (parentWidth.isFinite) {
-        final items = (parentWidth / widthWithSpacing).floor();
+        final items = (parentWidth / (childWidth + spacing)).floor();
         final isOneRow = items >= childCount && isOneRowExpanded;
         baseItems = (isOneRow ? childCount : items);
-        double remainder = parentWidth - (widthWithSpacing * baseItems);
+        double remainder = parentWidth - ((childWidth + spacing) * baseItems);
         extraWidth = remainder / baseItems;
       }
 
-      final newWidth = extraWidth + widthWithSpacing;
+      final newWidth = extraWidth + childWidth;
       child.layout(BoxConstraints.tight(Size(newWidth, child.size.height)),
           parentUsesSize: true);
 
       // Adjust x position based on text direction
-      final childX = isRtl ? (x - newWidth) : x;
+      final childX = isRtl ? (x - newWidth - spacing / 2) : x + spacing;
       (child.parentData as WrapParentData).offset = Offset(childX, y);
 
       // Update x position based on text direction
-      x = isRtl ? (x - newWidth) : (x + newWidth);
+      x = isRtl ? (x - newWidth - spacing) : (x + newWidth + spacing);
 
       // Handle wrapping to next line
-      if (isRtl ? (x <= widthWithSpacing) : (x >= parentWidth)) {
+      if (isRtl ? (x <= childWidth) : (x >= parentWidth)) {
         x = isRtl ? parentWidth : 0;
         y += child.size.height;
         y += runSpacing;
@@ -57,6 +60,6 @@ class RenderFlexibleWrap extends RenderWrap {
           (child.parentData as WrapParentData).offset.dy + child.size.height;
       child = childAfter(child);
     }
-    size = Size(constraints.maxWidth, maxHeight);
+    size = Size(parentWidth, maxHeight);
   }
 }
