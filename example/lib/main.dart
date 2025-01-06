@@ -8,7 +8,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -47,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
             spacing: 12.0,
             runSpacing: 12.0,
             textDirection: TextDirection.rtl,
-            children: List.generate(6, (int index) {
+            children: List.generate(20, (int index) {
               return Container(
                 height: 100,
                 width: 300,
