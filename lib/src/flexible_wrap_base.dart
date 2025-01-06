@@ -16,6 +16,7 @@ class FlexibleWrap extends Wrap {
       super.children,
       super.textDirection,
       super.spacing,
+      super.runSpacing,
       this.isOneRowExpanded = false});
 
   /// Whether a single row of children can expand to fill available space.
@@ -26,6 +27,7 @@ class FlexibleWrap extends Wrap {
     return RenderFlexibleWrap(
         spacing: spacing,
         textDirection: textDirection ?? Directionality.maybeOf(context),
+        runSpacing: runSpacing,
         isOneRowExpanded: isOneRowExpanded);
   }
 }

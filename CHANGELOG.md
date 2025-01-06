@@ -1,32 +1,37 @@
-## 0.0.1
+## 1.0.5
 
-* Adds FlexibleWrap widget
+* Support `runSpacing` parameter
+* Improve `spacing` usage
 
-## 0.0.3
+## 1.0.4
 
-* Adds spacing to item width
+* Fixed RTL Direction issue
 
-## 0.0.4
+## 1.0.3
 
-* Update builder to return only index instead of index and extra width
+* Support RTL Direction
+
+## 1.0.2
+
+* Fixed parent max height issue
+
+## 1.0.1
+
+* Fixed hidden items issue
 
 ## 1.0.0
 
 * Introduced a custom Render Object to enhance the performance of the FlexibleWrap widget.
 * Added isOneRowExpanded flag for control over one row behavior
 
-## 1.0.1
+## 0.0.4
 
-* Fixed hidden items issue
+* Update builder to return only index instead of index and extra width
 
-## 1.0.2
+## 0.0.3
 
-* Fixed parent max height issue
+* Adds spacing to item width
 
-## 1.0.3
+## 0.0.1
 
-* Support RTL Direction
-
-## 1.0.4
-
-* Fixed RTL Direction issue
+* Adds FlexibleWrap widget
