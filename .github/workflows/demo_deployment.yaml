@@ -5,6 +5,9 @@ on:
     branches:
       - 27-github-workflow-for-deploy-example-as-demo
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
