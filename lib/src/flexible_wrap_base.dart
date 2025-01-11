@@ -30,4 +30,27 @@ class FlexibleWrap extends Wrap {
         runSpacing: runSpacing,
         isOneRowExpanded: isOneRowExpanded);
   }
+
+  @override
+  void updateRenderObject(
+      BuildContext context, RenderFlexibleWrap renderObject) {
+    renderObject
+      ..spacing = spacing
+      ..runSpacing = runSpacing
+      ..textDirection = textDirection ?? Directionality.maybeOf(context)
+      ..isOneRowExpanded = isOneRowExpanded;
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DoubleProperty('spacing', spacing));
+    properties.add(DoubleProperty('runSpacing', runSpacing));
+    properties.add(EnumProperty<TextDirection>('textDirection', textDirection,
+        defaultValue: null));
+    properties.add(FlagProperty('isOneRowExpanded',
+        value: isOneRowExpanded,
+        ifTrue: 'one row expanded',
+        ifFalse: 'one row not expanded'));
+  }
 }

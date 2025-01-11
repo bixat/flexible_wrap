@@ -30,7 +30,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final spacing = 12.0;
+  double spacing = 12.0;
+  int itemCount = 20;
+  double itemHeight = 100;
+  double itemWidth = 300;
+  double wrapWidth = 700;
+  bool isRTL = true;
+  bool isOneRowExpanded = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,43 +45,192 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: SingleChildScrollView(
-        child: FlexibleWrap(
-          spacing: spacing,
-          runSpacing: spacing,
-          textDirection: TextDirection.rtl,
-          children: List.generate(20, (int index) {
-            return Container(
-              height: 100,
-              width: 300,
-              decoration: BoxDecoration(
-                  color: Colors.blue, borderRadius: BorderRadius.circular(8.0)),
-              child: const Center(
-                child: ListTile(
-                  title: Text(
-                    "Lorem Ipsum is simply dummy text",
-                    style: TextStyle(color: Colors.white),
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  subtitle: Text(
-                    "Lorem Ipsum has been the industry's standard",
-                    style: TextStyle(color: Colors.white),
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  leading: Icon(
-                    Icons.insert_emoticon,
-                    color: Colors.white,
-                    size: 60.0,
-                  ),
-                  trailing: Icon(
-                    Icons.favorite,
-                    color: Colors.white,
+      body: Column(
+        spacing: 20.0,
+        children: [
+          ColoredBox(
+            color: Colors.white,
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 600.0),
+              child: Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          const Text('RTL:'),
+                          Switch(
+                            value: isRTL,
+                            onChanged: (value) {
+                              setState(() {
+                                isRTL = value;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          const Text('One Row Expanded:'),
+                          Switch(
+                            value: isOneRowExpanded,
+                            onChanged: (value) {
+                              setState(() {
+                                isOneRowExpanded = value;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          const Text('Spacing:'),
+                          Expanded(
+                            child: Slider(
+                              value: spacing,
+                              min: 0,
+                              max: 50,
+                              divisions: 50,
+                              label: spacing.round().toString(),
+                              onChanged: (value) {
+                                setState(() {
+                                  spacing = value;
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          const Text('Item Count:'),
+                          Expanded(
+                            child: Slider(
+                              value: itemCount.toDouble(),
+                              min: 1,
+                              max: 50,
+                              divisions: 49,
+                              label: itemCount.toString(),
+                              onChanged: (value) {
+                                setState(() {
+                                  itemCount = value.toInt();
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          const Text('Item Height:'),
+                          Expanded(
+                            child: Slider(
+                              value: itemHeight,
+                              min: 50,
+                              max: 200,
+                              divisions: 150,
+                              label: itemHeight.round().toString(),
+                              onChanged: (value) {
+                                setState(() {
+                                  itemHeight = value;
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          const Text('Item Width:'),
+                          Expanded(
+                            child: Slider(
+                              value: itemWidth,
+                              min: 50,
+                              max: 400,
+                              divisions: 350,
+                              label: itemWidth.round().toString(),
+                              onChanged: (value) {
+                                setState(() {
+                                  itemWidth = value;
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          const Text('Wrap Width:'),
+                          Expanded(
+                            child: Slider(
+                              value: wrapWidth,
+                              min: 100,
+                              max: MediaQuery.of(context).size.width,
+                              divisions: 100,
+                              label: wrapWidth.round().toString(),
+                              onChanged: (value) {
+                                setState(() {
+                                  wrapWidth = value;
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
               ),
-            );
-          }).toList(),
-        ),
+            ),
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Center(
+                child: SizedBox(
+                  width: wrapWidth,
+                  child: FlexibleWrap(
+                    spacing: spacing,
+                    runSpacing: spacing,
+                    isOneRowExpanded: isOneRowExpanded,
+                    textDirection:
+                        isRTL ? TextDirection.rtl : TextDirection.ltr,
+                    children: List.generate(itemCount, (int index) {
+                      return SizedBox(
+                        height: itemHeight,
+                        width: itemWidth,
+                        child: ListTile(
+                          tileColor: Colors.blue,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0)),
+                          title: const Text(
+                            "Lorem Ipsum is simply dummy text",
+                            style: TextStyle(color: Colors.white),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          subtitle: const Text(
+                            "Lorem Ipsum has been the industry's standard",
+                            style: TextStyle(color: Colors.white),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          leading: Icon(
+                            Icons.insert_emoticon,
+                            color: Colors.white,
+                            size: itemWidth / 5,
+                          ),
+                          trailing: const Icon(
+                            Icons.favorite,
+                            color: Colors.white,
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
