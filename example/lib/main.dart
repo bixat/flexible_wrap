@@ -49,136 +49,138 @@ class _MyHomePageState extends State<MyHomePage> {
         spacing: 20.0,
         children: [
           ColoredBox(
-            color: Colors.white,
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 600.0),
-              child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          const Text('RTL:'),
-                          Switch(
-                            value: isRTL,
-                            onChanged: (value) {
-                              setState(() {
-                                isRTL = value;
-                              });
-                            },
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          const Text('One Row Expanded:'),
-                          Switch(
-                            value: isOneRowExpanded,
-                            onChanged: (value) {
-                              setState(() {
-                                isOneRowExpanded = value;
-                              });
-                            },
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          const Text('Spacing:'),
-                          Expanded(
-                            child: Slider(
-                              value: spacing,
-                              min: 0,
-                              max: 50,
-                              divisions: 50,
-                              label: spacing.round().toString(),
+            color: Theme.of(context).scaffoldBackgroundColor,
+            child: Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 600.0),
+                child: Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            const Text('RTL:'),
+                            Switch(
+                              value: isRTL,
                               onChanged: (value) {
                                 setState(() {
-                                  spacing = value;
+                                  isRTL = value;
                                 });
                               },
                             ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          const Text('Item Count:'),
-                          Expanded(
-                            child: Slider(
-                              value: itemCount.toDouble(),
-                              min: 1,
-                              max: 50,
-                              divisions: 49,
-                              label: itemCount.toString(),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            const Text('One Row Expanded:'),
+                            Switch(
+                              value: isOneRowExpanded,
                               onChanged: (value) {
                                 setState(() {
-                                  itemCount = value.toInt();
+                                  isOneRowExpanded = value;
                                 });
                               },
                             ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          const Text('Item Height:'),
-                          Expanded(
-                            child: Slider(
-                              value: itemHeight,
-                              min: 50,
-                              max: 200,
-                              divisions: 150,
-                              label: itemHeight.round().toString(),
-                              onChanged: (value) {
-                                setState(() {
-                                  itemHeight = value;
-                                });
-                              },
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            const Text('Spacing:'),
+                            Expanded(
+                              child: Slider(
+                                value: spacing,
+                                min: 0,
+                                max: 50,
+                                divisions: 50,
+                                label: spacing.round().toString(),
+                                onChanged: (value) {
+                                  setState(() {
+                                    spacing = value;
+                                  });
+                                },
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          const Text('Item Width:'),
-                          Expanded(
-                            child: Slider(
-                              value: itemWidth,
-                              min: 50,
-                              max: 400,
-                              divisions: 350,
-                              label: itemWidth.round().toString(),
-                              onChanged: (value) {
-                                setState(() {
-                                  itemWidth = value;
-                                });
-                              },
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            const Text('Item Count:'),
+                            Expanded(
+                              child: Slider(
+                                value: itemCount.toDouble(),
+                                min: 1,
+                                max: 50,
+                                divisions: 49,
+                                label: itemCount.toString(),
+                                onChanged: (value) {
+                                  setState(() {
+                                    itemCount = value.toInt();
+                                  });
+                                },
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          const Text('Wrap Width:'),
-                          Expanded(
-                            child: Slider(
-                              value: wrapWidth,
-                              min: 100,
-                              max: MediaQuery.of(context).size.width,
-                              divisions: 100,
-                              label: wrapWidth.round().toString(),
-                              onChanged: (value) {
-                                setState(() {
-                                  wrapWidth = value;
-                                });
-                              },
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            const Text('Item Height:'),
+                            Expanded(
+                              child: Slider(
+                                value: itemHeight,
+                                min: 50,
+                                max: 200,
+                                divisions: 150,
+                                label: itemHeight.round().toString(),
+                                onChanged: (value) {
+                                  setState(() {
+                                    itemHeight = value;
+                                  });
+                                },
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            const Text('Item Width:'),
+                            Expanded(
+                              child: Slider(
+                                value: itemWidth,
+                                min: 50,
+                                max: 400,
+                                divisions: 350,
+                                label: itemWidth.round().toString(),
+                                onChanged: (value) {
+                                  setState(() {
+                                    itemWidth = value;
+                                  });
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            const Text('Wrap Width:'),
+                            Expanded(
+                              child: Slider(
+                                value: wrapWidth,
+                                min: 100,
+                                max: MediaQuery.of(context).size.width,
+                                divisions: 100,
+                                label: wrapWidth.round().toString(),
+                                onChanged: (value) {
+                                  setState(() {
+                                    wrapWidth = value;
+                                  });
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
