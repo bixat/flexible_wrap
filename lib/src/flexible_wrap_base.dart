@@ -31,8 +31,7 @@ class FlexibleWrap extends MultiChildRenderObjectWidget {
         spacing: spacing,
         textDirection: textDirection ?? Directionality.maybeOf(context),
         runSpacing: runSpacing,
-        isOneRowExpanded: isOneRowExpanded)
-      ..markNeedsLayout();
+        isOneRowExpanded: isOneRowExpanded);
   }
 
   @override
