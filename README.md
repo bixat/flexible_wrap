@@ -17,6 +17,10 @@ Perfect for implementing uniform grid layouts like product cards, image gallerie
 
 _Note: We currently support [only items that have the same width](https://github.com/bixat/flexible_wrap/issues/10); [height direction is not supported yet](https://github.com/bixat/flexible_wrap/issues/11)_
 
+## Example Demo
+
+Check out the live demo of FlexibleWrap at [https://bixat.github.io/flexible_wrap/](https://bixat.github.io/flexible_wrap/)
+
 ## Usage
 
 Here's a basic example of how to use FlexibleWrap:

@@ -24,7 +24,7 @@ jobs:
       working-directory: example
 
     - name: Build project
-      run: flutter build web
+      run: flutter build web --release
       working-directory: example
 
     - name: Deploy to GitHub Pages
