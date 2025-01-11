@@ -1,9 +1,6 @@
 name: Deploy to GitHub Pages
-
 on:
-  push:
-    branches:
-      - 27-github-workflow-for-deploy-example-as-demo
+  workflow_dispatch:
 
 permissions:
   contents: write
