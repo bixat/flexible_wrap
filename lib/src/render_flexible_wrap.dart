@@ -12,7 +12,7 @@ class RenderFlexibleWrap extends RenderWrap {
       this.isOneRowExpanded = false});
 
   /// Indicates whether a single row should be expanded to fill the available space.
-  final bool isOneRowExpanded;
+  bool isOneRowExpanded;
 
   @override
   void performLayout() {

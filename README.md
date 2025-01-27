@@ -2,11 +2,6 @@
 
 FlexibleWrap is a Flutter widget that provides an advanced wrap layout with flexible spacing and RTL support. It automatically distributes available space between items in a row, similar to Wrap widget but with additional features:
 
-- Automatically expands items to fill available space in a single row
-- Supports right-to-left (RTL) text direction
-- Maintains consistent spacing between items
-- Handles dynamic wrapping based on parent constraints
-
 Perfect for implementing uniform grid layouts like product cards, image galleries, or any UI that requires evenly-spaced wrapped items.
 
 ## Showcase
@@ -22,74 +17,82 @@ Perfect for implementing uniform grid layouts like product cards, image gallerie
 
 _Note: We currently support [only items that have the same width](https://github.com/bixat/flexible_wrap/issues/10); [height direction is not supported yet](https://github.com/bixat/flexible_wrap/issues/11)_
 
-## Getting Started
+## Example Demo
 
-To get started with FlexibleWrap, add it to your `pubspec.yaml` file:
-
-```yaml
-dependencies:
-  flexible_wrap: ^latest_version
-```
-
-Replace `^latest_version` with the current version of the package.
-
-Then, import it in your Dart file:
-
-```dart
-import 'package:flexible_wrap/flexible_wrap.dart';
-```
+Check out the live demo of FlexibleWrap at [https://bixat.github.io/flexible_wrap/](https://bixat.github.io/flexible_wrap/)
 
 ## Usage
 
 Here's a basic example of how to use FlexibleWrap:
 
 ```dart
-FlexibleWrap(
-  isOneRowExpanded: true,
-  spacing: 12.0,
-  children: List.generate(3, (int index) {
-    return Padding(
-      padding: EdgeInsets.all(padding),
-      child: Container(
-        height: 100,
-        width: 300,
-        decoration: BoxDecoration(
-            color: Colors.blue,
-            borderRadius: BorderRadius.circular(8.0)),
-        child: const Center(
-          child: ListTile(
-            title: Text(
-              "Lorem Ipsum is simply dummy text",
-              style: TextStyle(color: Colors.white),
-              overflow: TextOverflow.ellipsis,
-            ),
-            subtitle: Text(
-              "Lorem Ipsum has been the industry's standard",
-              style: TextStyle(color: Colors.white),
-              overflow: TextOverflow.ellipsis,
-            ),
-            leading: Icon(
-              Icons.insert_emoticon,
-              color: Colors.white,
-              size: 60.0,
-            ),
-            trailing: Icon(
-              Icons.favorite,
-              color: Colors.white,
-            ),
-          ),
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key, required this.title});
+
+  final String title;
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final spacing = 12.0;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text(widget.title),
+      ),
+      body: SingleChildScrollView(
+        child: FlexibleWrap(
+          spacing: spacing,
+          runSpacing: spacing,
+          textDirection: TextDirection.rtl,
+          children: List.generate(20, (int index) {
+            return Container(
+              height: 100,
+              width: 300,
+              decoration: BoxDecoration(
+                  color: Colors.blue, borderRadius: BorderRadius.circular(8.0)),
+              child: const Center(
+                child: ListTile(
+                  title: Text(
+                    "Lorem Ipsum is simply dummy text",
+                    style: TextStyle(color: Colors.white),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  subtitle: Text(
+                    "Lorem Ipsum has been the industry's standard",
+                    style: TextStyle(color: Colors.white),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  leading: Icon(
+                    Icons.insert_emoticon,
+                    color: Colors.white,
+                    size: 60.0,
+                  ),
+                  trailing: Icon(
+                    Icons.favorite,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            );
+          }).toList(),
         ),
       ),
     );
-  }).toList(),
-),
+  }
+}
 ```
 
 ## Customization
 
 FlexibleWrap offers several customization options to tailor the layout to your needs:
 
-- **one row behavior**: Specify one row behavior using `isOneRowExpanded`.
+- **One Row Behavior**: Specify one row behavior using `isOneRowExpanded`.
 
 ## Contributing
 
