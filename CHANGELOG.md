@@ -1,5 +1,9 @@
 ## 1.0.5
 
+* Fixed LTR issue
+
+## 1.0.5
+
 * Support `runSpacing` parameter
 * Improve `spacing` usage
 
