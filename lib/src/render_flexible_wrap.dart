@@ -50,7 +50,7 @@ class RenderFlexibleWrap extends RenderWrap {
       x = isRtl ? (x - newWidth - spacing) : (x + newWidth + spacing);
 
       // Handle wrapping to next line
-      if (isRtl ? (x <= childWidth) : (x >= parentWidth)) {
+      if (isRtl ? (x <= childWidth) : (x >= parentWidth - spacing)) {
         x = isRtl ? parentWidth : 0;
         y += child.size.height;
         y += runSpacing;
