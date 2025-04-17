@@ -1,6 +1,6 @@
 # FlexibleWrap
 
-FlexibleWrap is a Flutter widget that provides an advanced wrap layout with flexible spacing and RTL support. It automatically distributes available space between items in a row, similar to Wrap widget but with additional features:
+FlexibleWrap is a Flutter widget that provides an advanced wrap layout with flexible spacing and RTL support. It automatically distributes available space between items in a row, similar to Wrap widget but with additional features
 
 Perfect for implementing uniform grid layouts like product cards, image galleries, or any UI that requires evenly-spaced wrapped items.
 
@@ -11,17 +11,39 @@ Perfect for implementing uniform grid layouts like product cards, image gallerie
 ## Features
 
 - **Dynamic Wrapping**: Automatically wraps widgets onto the next line based on the available space.
-- **Flexible Spacing**: Adjusts spacing between items and runs to achieve the desired visual appearance.
 - **Expanded Items**: Expands the items to fill the available space on the row.
 - **RTL Support**: Provides support for right-to-left text direction, ensuring proper layout and alignment for RTL languages.
+- **Customizable Spacing**: Control both horizontal and vertical spacing between items
+- **One Row Expansion**: Option to expand items when they fit in a single row
 
 _Note: We currently support [only items that have the same width](https://github.com/bixat/flexible_wrap/issues/10); [height direction is not supported yet](https://github.com/bixat/flexible_wrap/issues/11)_
+
+## Installation
+
+Add this to your package's pubspec.yaml file:
+
+```yaml
+dependencies:
+  flexible_wrap: ^latest_version
+```
+
+Then run:
+
+```bash
+$ flutter pub get
+```
 
 ## Example Demo
 
 Check out the live demo of FlexibleWrap at [https://bixat.github.io/flexible_wrap/](https://bixat.github.io/flexible_wrap/)
 
 ## Usage
+
+First, import the package:
+
+```dart
+import 'package:flexible_wrap/flexible_wrap.dart';
+```
 
 Here's a basic example of how to use FlexibleWrap:
 
@@ -92,12 +114,50 @@ class _MyHomePageState extends State<MyHomePage> {
 
 FlexibleWrap offers several customization options to tailor the layout to your needs:
 
-- **One Row Behavior**: Specify one row behavior using `isOneRowExpanded`.
+### Parameters
+
+| Parameter          | Type            | Default  | Description                                      |
+| ------------------ | --------------- | -------- | ------------------------------------------------ |
+| `children`         | `List<Widget>`  | Required | The widgets to display in the wrap layout        |
+| `spacing`          | `double`        | `0.0`    | Horizontal space between children                |
+| `runSpacing`       | `double`        | `0.0`    | Vertical space between runs                      |
+| `textDirection`    | `TextDirection` | `null`   | The text direction for RTL support               |
+| `isOneRowExpanded` | `bool`          | `false`  | Whether to expand items when they fit in one row |
+
+### Common Use Cases
+
+1. **Grid Layout**:
+
+```dart
+FlexibleWrap(
+  spacing: 8.0,
+  runSpacing: 8.0,
+  children: items,
+)
+```
+
+2. **RTL Support**:
+
+```dart
+FlexibleWrap(
+  spacing: 8.0,
+  textDirection: TextDirection.rtl,
+  children: items,
+)
+```
 
 ## Contributing
 
-Contributions to FlexibleWrap are welcome! Please feel free to submit pull requests or open issues for bugs and feature requests.
+We welcome contributions to FlexibleWrap! Here's how you can help:
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+Please make sure to update tests and documentation as appropriate.
 
 ## License
 
-FlexibleWrap is licensed under the MIT License. See the LICENSE file for details.
+FlexibleWrap is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
