@@ -1,5 +1,15 @@
 # FlexibleWrap
+[![Test](https://github.com/bixat/flexible_wrap/actions/workflows/ci.yaml/badge.svg)](https://github.com/bixat/fflexible_wrap/actions/workflows/ci.yaml)
+[![Demo deployment](https://github.com/bixat/flexible_wrap/actions/workflows/demo_deployment.yaml/badge.svg)](https://github.com/bixat/flexible_wrap/actions/workflows/demo_deployment.yaml)
+[![Pub Monthly Downloads](https://img.shields.io/pub/dm/flexible_wrap)](https://pub.dev/packages/flexible_wrap)
+[![Pub Publisher](https://img.shields.io/pub/publisher/flexible_wrap)](https://bixat.dev)
+[![Pub Version](https://img.shields.io/pub/v/flexible_wrap)](https://pub.dev/packages/flexible_wrap)
+[![Pub Likes](https://img.shields.io/pub/likes/flexible_wrap)](https://pub.dev/packages/flexible_wrap)
 
+
+
+
+---
 FlexibleWrap is a Flutter widget that provides an advanced wrap layout with flexible spacing and RTL support. It automatically distributes available space between items in a row, similar to Wrap widget but with additional features
 
 Perfect for implementing uniform grid layouts like product cards, image galleries, or any UI that requires evenly-spaced wrapped items.
@@ -7,6 +17,7 @@ Perfect for implementing uniform grid layouts like product cards, image gallerie
 ## Showcase
 
 ![showcase](https://github.com/bixat/flexible_wrap/blob/main/showcase.gif?raw=true)
+
 
 ## Features
 
