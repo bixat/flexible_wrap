@@ -130,6 +130,33 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 ```
 
+## Important Implementation Note
+
+When using FlexibleWrap with dynamic dimensions (height, width, or item count), you should add a ValueKey to force widget rebuilds when these properties change:
+
+```dart
+FlexibleWrap(
+  key: ValueKey('$itemHeight-$itemWidth-$itemCount'), // Force rebuild when dimensions change
+  spacing: spacing,
+  runSpacing: runSpacing,
+  isOneRowExpanded: isOneRowExpanded,
+  textDirection: isRTL ? TextDirection.rtl : TextDirection.ltr,
+  children: [
+    // Your widgets here
+  ],
+)
+```
+
+**Why is this needed?**
+
+The ValueKey ensures that Flutter recognizes the widget as "changed" when dimensions are updated, forcing a complete rebuild of the render object. This is particularly important when:
+
+- Child widget dimensions change dynamically
+- The number of children changes
+- Layout properties are modified at runtime
+
+Without the ValueKey, Flutter's widget tree optimization might prevent the render object from properly updating, leading to visual inconsistencies where dimension changes don't immediately reflect in the UI.
+
 ## Customization
 
 FlexibleWrap offers several customization options to tailor the layout to your needs:
