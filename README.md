@@ -17,6 +17,30 @@ Perfect for implementing uniform grid layouts like product cards, image gallerie
 
 _Note: We currently support [only items that have the same width](https://github.com/bixat/flexible_wrap/issues/10); [height direction is not supported yet](https://github.com/bixat/flexible_wrap/issues/11)_
 
+## Benchmarks: GridView vs. FlexibleWrap
+
+| Feature              | GridView                                                                                     | FlexibleWrap                                                                                     |
+| -------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| **Description**      | A layout that arranges items in a grid format.                                               | It automatically distributes available space between items in a row.                             |
+| **Usage**            | Efficient for uniform item sizes.                                                            | Ideal for dynamic item sizes and wrapping.                                                       |
+| **Performance**      | Better performance with a builder pattern.                                                   | Currently does not support a builder; uses children instead.                                     |
+| **Screen Recording** | ![GridView](https://github.com/user-attachments/assets/90b5d6bf-dff4-4e54-8268-a75968d00551) | ![FlexibleWrap](https://github.com/user-attachments/assets/76c9f26a-a955-427b-a634-290eed41c7b9) |
+
+## Installation
+
+Add this to your package's pubspec.yaml file:
+
+```yaml
+dependencies:
+  flexible_wrap: ^latest_version
+```
+
+Then run:
+
+```bash
+$ flutter pub get
+```
+
 ## Example Demo
 
 Check out the live demo of FlexibleWrap at [https://bixat.github.io/flexible_wrap/](https://bixat.github.io/flexible_wrap/)
@@ -88,6 +112,33 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 ```
 
+## Important Implementation Note
+
+When using FlexibleWrap with dynamic dimensions (height, width, or item count), you should add a ValueKey to force widget rebuilds when these properties change:
+
+```dart
+FlexibleWrap(
+  key: ValueKey('$itemHeight-$itemWidth-$itemCount'), // Force rebuild when dimensions change
+  spacing: spacing,
+  runSpacing: runSpacing,
+  isOneRowExpanded: isOneRowExpanded,
+  textDirection: isRTL ? TextDirection.rtl : TextDirection.ltr,
+  children: [
+    // Your widgets here
+  ],
+)
+```
+
+**Why is this needed?**
+
+The ValueKey ensures that Flutter recognizes the widget as "changed" when dimensions are updated, forcing a complete rebuild of the render object. This is particularly important when:
+
+- Child widget dimensions change dynamically
+- The number of children changes
+- Layout properties are modified at runtime
+
+Without the ValueKey, Flutter's widget tree optimization might prevent the render object from properly updating, leading to visual inconsistencies where dimension changes don't immediately reflect in the UI.
+
 ## Customization
 
 FlexibleWrap offers several customization options to tailor the layout to your needs:
@@ -100,4 +151,4 @@ Contributions to FlexibleWrap are welcome! Please feel free to submit pull reque
 
 ## License
 
-FlexibleWrap is licensed under the MIT License. See the LICENSE file for details.
+FlexibleWrap is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.

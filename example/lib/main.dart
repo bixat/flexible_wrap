@@ -192,37 +192,68 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: SizedBox(
                   width: wrapWidth,
                   child: FlexibleWrap(
+                    key: ValueKey(
+                        '$itemHeight-$itemWidth-$itemCount'), // Force rebuild when dimensions change
                     spacing: spacing,
                     runSpacing: spacing,
                     isOneRowExpanded: isOneRowExpanded,
                     textDirection:
                         isRTL ? TextDirection.rtl : TextDirection.ltr,
                     children: List.generate(itemCount, (int index) {
-                      return SizedBox(
+                      return Container(
                         height: itemHeight,
                         width: itemWidth,
-                        child: ListTile(
-                          tileColor: Colors.blue,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0)),
-                          title: const Text(
-                            "Lorem Ipsum is simply dummy text",
-                            style: TextStyle(color: Colors.white),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          subtitle: const Text(
-                            "Lorem Ipsum has been the industry's standard",
-                            style: TextStyle(color: Colors.white),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          leading: Icon(
-                            Icons.insert_emoticon,
-                            color: Colors.white,
-                            size: itemWidth / 5,
-                          ),
-                          trailing: const Icon(
-                            Icons.favorite,
-                            color: Colors.white,
+                        decoration: BoxDecoration(
+                          color: Colors.blue,
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: Material(
+                          color: Colors.transparent,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.insert_emoticon,
+                                  color: Colors.white,
+                                  size: (itemWidth / 5).clamp(16.0, 48.0),
+                                ),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Lorem Ipsum is simply dummy text",
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: itemHeight > 80 ? 2 : 1,
+                                      ),
+                                      if (itemHeight > 60)
+                                        Text(
+                                          "Lorem Ipsum has been the industry's standard",
+                                          style: const TextStyle(
+                                            color: Colors.white70,
+                                            fontSize: 12,
+                                          ),
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: itemHeight > 100 ? 2 : 1,
+                                        ),
+                                    ],
+                                  ),
+                                ),
+                                const Icon(
+                                  Icons.favorite,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       );
