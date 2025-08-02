@@ -29,6 +29,15 @@ Perfect for implementing uniform grid layouts like product cards, image gallerie
 
 _Note: We currently support [only items that have the same width](https://github.com/bixat/flexible_wrap/issues/10); [height direction is not supported yet](https://github.com/bixat/flexible_wrap/issues/11)_
 
+## Benchmarks: GridView vs. FlexibleWrap
+
+| Feature          | GridView                                         | FlexibleWrap                                   |
+|------------------|--------------------------------------------------|------------------------------------------------|
+| **Description**  | A layout that arranges items in a grid format.  | It automatically distributes available space between items in a row. |
+| **Usage**        | Efficient for uniform item sizes.                | Ideal for dynamic item sizes and wrapping.    |
+| **Performance**   | Better performance with a builder pattern.       | Currently does not support a builder; uses children instead. |
+| **Screen Recording** | ![GridView](https://github.com/user-attachments/assets/90b5d6bf-dff4-4e54-8268-a75968d00551) | ![FlexibleWrap](https://github.com/user-attachments/assets/76c9f26a-a955-427b-a634-290eed41c7b9) |
+
 ## Installation
 
 Add this to your package's pubspec.yaml file:
